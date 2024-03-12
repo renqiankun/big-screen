@@ -39,7 +39,7 @@
     .left-menu {
       width: 330px;
       height: 100%;
-      background-color: rgb(242, 243, 245);
+      // background-color: rgb(242, 243, 245);
     }
     .mid-content {
         flex: 1;

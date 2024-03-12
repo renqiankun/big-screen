@@ -13,7 +13,12 @@
     />
     <div class="edit-screens" ref="screensRef" @wheel="handleWheel" @scroll="handleScroll">
       <div ref="containerRef" class="screen-container" :style="wrapStyle">
-        <div class="canvas" ref="canvasRef" :style="canvasStyle">
+        <div
+          class="canvas"
+          ref="canvasRef"
+          :style="canvasStyle"
+         
+        >
           <slot></slot>
         </div>
       </div>
@@ -26,7 +31,8 @@ import { computed, nextTick, onMounted, reactive, ref } from 'vue'
 import { SketchRule } from 'vue3-sketch-ruler'
 import 'vue3-sketch-ruler/lib/style.css'
 import { debounce } from 'lodash-es'
-import { IPannel } from '../../type'
+import { type IPannel } from '../../type'
+import { getUUID } from '@/utils';
 const props = withDefaults(
   defineProps<{
     pannel: IPannel
@@ -164,6 +170,7 @@ const resizeHand = debounce(resizeAndCenter, 200)
 const initEvent = () => {
   window.addEventListener('resize', resizeHand)
 }
+
 </script>
 
 <style lang="scss" scoped>
