@@ -36,6 +36,7 @@
   .content-wrap {
     flex: 1;
     display: flex;
+    overflow: hidden;
     .left-menu {
       width: 330px;
       height: 100%;

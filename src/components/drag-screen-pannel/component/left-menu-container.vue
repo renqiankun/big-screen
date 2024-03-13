@@ -41,9 +41,12 @@
     display: flex;
     height: 100%;
     margin-top: 1px;
+    overflow: hidden;
     .menu-wrap {
       width: 65px;
       background-color: #f2f3f5;
+      box-sizing: border-box;
+      padding: 6px 8px;
     }
     .component-wrap {
       flex: 1;

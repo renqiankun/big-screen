@@ -136,7 +136,6 @@ const handleScroll = () => {
   startY.value = startYNum
 }
 const handleCornerClick = (e: any) => {
-  console.log('handleCornerClick', e)
 }
 // 控制缩放值
 const handleWheel = async (e: {
@@ -233,7 +232,8 @@ const initEvent = () => {
 
   .canvas {
     position: absolute;
-    background-color: #e1e1e1;
+    background-color: var(--screen-primary-bg-color);
+    box-shadow: 0 0 1px rgba(0,0,0,0.4);
   }
 }
 </style>

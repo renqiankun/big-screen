@@ -13,6 +13,7 @@
           @drop="dropHand"
           v-on-click-outside="editorBlurHand"
           @contextmenu="onContextMenu($event)"
+          :style="pannelStyle"
         >
           <VueDragResizeRotate
             v-for="item in props.pannel.components"
@@ -24,7 +25,9 @@
             :y="item.y"
             :w="item.w"
             :h="item.h"
+            :r="item.r"
             :active="item.active"
+            rotatable
             :prevent-deactivation="item.preventDeactivation"
             @activated="onActivated(item)"
             @deactivated="onDeactivated(item)"
@@ -52,11 +55,15 @@
         </div>
       </sketchRule>
     </template>
+
+    <template #right>
+      <attrRight :pannel="pannel" />
+    </template>
   </Layout>
 </template>
 
 <script setup lang="ts">
-import Layout from './layout/index.vue'
+import Layout from './layout.vue'
 import sketchRule from './editor/sketch-rule/index.vue'
 import subLine from './editor/subLine.vue'
 import Area from './editor/Area.vue'
@@ -69,6 +76,7 @@ import { vOnClickOutside } from '@vueuse/components'
 import { useClipboard } from '@vueuse/core'
 import '@imengyu/vue3-context-menu/lib/vue3-context-menu.css'
 import ContextMenu from '@imengyu/vue3-context-menu'
+import attrRight from './attr-right/index.vue'
 const props = defineProps<{
   pannel: IPannel
 }>()
@@ -101,6 +109,25 @@ let select = computed(() => {
   return active.value.select
 })
 
+let pannelStyle = computed(() => {
+  let bgColor = props.pannel.bgColor
+  let bgImg = props.pannel.bgImg
+  let bgMethod = props.pannel.bgMethod
+  let resetStyle: any = {}
+  if (bgColor) {
+    resetStyle.backgroundColor = bgColor
+  }
+  if (bgImg) {
+    resetStyle.backgroundImage = `url(${bgImg})`
+    resetStyle.backgroundRepeat = 'no-repeat'
+    resetStyle.backgroundPosition = 'center'
+  }
+  if (bgMethod) {
+    resetStyle.backgroundSize = bgMethod
+  }
+  return resetStyle
+})
+
 const copyValue = ref('')
 const { text: copyText, copy } = useClipboard({ source: copyValue })
 copyHandler((e: any) => {
@@ -121,7 +148,7 @@ parseHandler((e: any) => {
   } catch (e) {}
 })
 
-deleteHand(()=>{
+deleteHand(() => {
   props.pannel.components = props.pannel.components.filter((item: any) => {
     return !item.active
   })
@@ -244,20 +271,19 @@ const editorBlurHand = () => {
   })
 }
 
-const onContextMenu = (e:any)=>{
+const onContextMenu = (e: any) => {
   return
   e.preventDefault()
   ContextMenu.showContextMenu({
-      x: e.x,
-      y: e.y,
-      items: [
-        { 
-          label: "A menu item", 
-          onClick: () => {
-          }
-        },
-      ]
-    })
+    x: e.x,
+    y: e.y,
+    items: [
+      {
+        label: 'A menu item',
+        onClick: () => {}
+      }
+    ]
+  })
 }
 </script>
 
