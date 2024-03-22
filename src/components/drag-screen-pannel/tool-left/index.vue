@@ -35,6 +35,7 @@
               :key="item.label"
               :title="item.label"
               :img="item.img"
+              :component="item.component || ''"
             />
           </el-scrollbar>
         </div>
@@ -47,7 +48,7 @@
 import leftMenuContainer from '../component/left-menu-container.vue'
 import leftMenuBtn from '../component/left-menu-btn.vue'
 import { PieChart } from '@element-plus/icons-vue'
-import { ref, computed ,onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import leftComponentItem from '../component/left-component-item.vue'
 // import barX from '@/assets/imgs/big-screen/chart/bar_x.png'
 import { Histogram } from '@element-plus/icons-vue'
@@ -57,6 +58,7 @@ type menuType = {
   icon?: any
   img?: string | undefined
   justComponentChild?: boolean
+  component?: string
   children?: menuType[]
 }
 let menuType = ref(1)
@@ -70,8 +72,13 @@ let menuTypeList: Array<menuType> = [
         label: '柱状图',
         value: 1,
         children: [
-          { label: '柱状图1', value: 11, img: 'bar_x' },
-          { label: '柱状图2', value: 22, img: 'bar_x' }
+          {
+            label: '柱状图1',
+            value: 11,
+            img: 'bar_x',
+            component:'chart-bar-line'
+          },
+          // { label: '柱状图2', value: 22, img: 'bar_x' }
         ]
       },
       {
@@ -138,7 +145,7 @@ const initSecoundMenu = () => {
     menuChildType.value = ''
   }
 }
-onMounted(()=>{
+onMounted(() => {
   initSecoundMenu()
 })
 </script>

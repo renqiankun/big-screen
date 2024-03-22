@@ -3,3 +3,9 @@ html{
     --screen-primary-text-second-color:rgb(132, 135, 136);
     --screen-primary-bg-color:#f2f3f5;
 }
+.el-color-picker{
+    width: 100%;
+    .el-color-picker__trigger{
+        width: 100%;
+    }
+}

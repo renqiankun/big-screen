@@ -42,7 +42,7 @@
             @rotating="(rotate: any) => onRotating(rotate, item)"
             @rotatestop="(rotate: any) => onRotating(rotate, item)"
           >
-            <p>{{ item.active }}</p>
+            <component :is='item.baseConfig.component' :config='item'></component>
           </VueDragResizeRotate>
           <subLine ref="subLineRef" />
           <Area
@@ -57,7 +57,7 @@
     </template>
 
     <template #right>
-      <attrRight :pannel="pannel" />
+      <attrRight :pannel="pannel" :current="current"/>
     </template>
   </Layout>
 </template>
@@ -95,10 +95,10 @@ let active = computed(() => {
   let activeList = props.pannel.components?.filter?.((item: any) => {
     return item.active
   })
-  if (activeList?.length > 0) {
+  if (activeList?.length > 1) {
     return { current: null, select: activeList }
   } else {
-    return { current: activeList[0], select: [] }
+    return { current: activeList[0], select: activeList }
   }
 })
 
@@ -158,7 +158,7 @@ const refLineParams = (data: any) => {
   subLineRef.value?.init(data)
 }
 
-const onActivated = (item: any) => {
+const onActivated = async (item: any) => {
   if (!isAreaSelect.value && !isControlHand()) {
     select.value?.forEach?.((el: any) => {
       el.active = false
@@ -247,10 +247,12 @@ const dropHand = (e: any) => {
   let { clientX: mouseX, clientY: mouseY } = e
   let x = mouseX - reactX
   let y = mouseY - reactY
+  let width = component.w
+  let height = component.h
   if (component) {
-    component.x = x / scale
-    component.y = y / scale
-    component.attr.id = getUUID()
+    component.x = x / scale - width/2
+    component.y = y / scale - height/2
+    component.id = getUUID()
     props.pannel.components.push(component)
   }
 }
@@ -265,7 +267,7 @@ const setEditFocus = (status: boolean) => {
 }
 const editorBlurHand = () => {
   dataForm.editFocus = false
-  console.log('editorBlurHand', select.value)
+  // console.log('editorBlurHand', select.value)
   select.value.forEach((item: any) => {
     item.preventDeactivation = true
   })

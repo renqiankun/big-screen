@@ -3,33 +3,44 @@
     <div class="title">
       <span class="title-text">{{ title }}</span>
     </div>
-    <div class="content"  @dragstart="handleDragStart">
+    <div class="content" @dragstart="handleDragStart">
       <div :draggable="true" class="img-wrap">
         <!-- <img :draggable="false" class="img" :src="img" :alt="title" /> -->
-        <imgThumb :draggable="false" class="img" :img="img" :alt="title"/>
+        <imgThumb :draggable="false" class="img" :img="img" :alt="title" />
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import imgThumb from './img-thumb.vue';
+import { commonOptionMap } from '../constant';
+import type { IComponent } from '../type'
+import imgThumb from './img-thumb.vue'
 const props = defineProps<{
   title: string
   img?: string | undefined
+  component: string
 }>()
 
 const handleDragStart = (e: any) => {
-  // {
-  //   x: 0,
-  //   y: 0,
-  //   w: 100,
-  //   id:null,
-  //   attr: {
-  //     component: 'name'
-  //   }
-  // }
-  e.dataTransfer.setData('component', "{}")
+  let data: IComponent = {
+    x: 0,
+    y: 0,
+    w: 500,
+    h: 300,
+    id: null,
+    r:0,
+    active:false,
+    preventDeactivation:false,
+    baseConfig: {
+      img: props.img as string,
+      label: props.title as string,
+      component: props.component as string
+    },
+    option:commonOptionMap[props.component as keyof typeof commonOptionMap]||{},
+    request:{}
+  }
+  e.dataTransfer.setData('component', JSON.stringify(data))
 }
 </script>
 

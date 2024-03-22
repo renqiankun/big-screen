@@ -11,8 +11,7 @@ const pannel = reactive<IPannel>({
   width: 1920,
   height: 1080,
   components: [
-    { x: 0, y: 0, w: 100, h: 100 ,active:false,preventDeactivation:false},
-    { x: 0, y: 0, w: 100, h: 100,active:false,preventDeactivation:false }
+
   ]
 })
 </script>
