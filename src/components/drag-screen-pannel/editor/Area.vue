@@ -14,7 +14,7 @@
 <script setup lang="ts">
 import { nextTick, onBeforeUnmount, onMounted, reactive, ref } from 'vue'
 import { type IPannel } from '../type'
-import {getComponentRotatedStyle} from '@/utils'
+import { getComponentRotatedStyle } from '@/utils'
 const props = defineProps<{
   pannel: IPannel
   content: any
@@ -39,7 +39,7 @@ const initEventHand = async () => {
   props.content?.addEventListener?.('mousedown', initSelect)
 }
 
-const hideArea = ()=>{
+const hideArea = () => {
   dataForm.width = 0
   dataForm.height = 0
 }
@@ -62,7 +62,7 @@ const mouseUp = async (e: any) => {
   isShow.value = false
   document.removeEventListener('mousemove', mouseMove)
   document.removeEventListener('mouseup', mouseUp)
-  let {x,y} = getMousePos(e)
+  let { x, y } = getMousePos(e)
   if (x == initStartX && y == initStartY) {
     hideArea()
     return
@@ -105,7 +105,7 @@ const getSelectArea = () => {
   // 区域起点坐标
   const { x, y } = dataForm.start
   // 计算所有的组件数据，判断是否在选中区域内
-  props.pannel.components.forEach((component:any) => {
+  props.pannel.components.forEach((component: any) => {
     // if (component.isLock) return;
 
     let componentAttr = component || {}
@@ -120,7 +120,7 @@ const getSelectArea = () => {
       x <= left &&
       y <= top &&
       left + width <= x + dataForm.width &&
-      top + height <= y + dataForm.height;
+      top + height <= y + dataForm.height
     if (isInArea && !component.lock) {
       component.preventDeactivation = true
       component.active = true
@@ -131,13 +131,20 @@ const getSelectArea = () => {
   })
 }
 
-
 const emits = defineEmits(['update:areaSelecting'])
 </script>
 
 <style lang="scss" scoped>
 .area {
-  border: 1px solid #70c0ff;
+  border: 1px solid var(--el-color-primary);
   position: absolute;
+  &::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: var(--el-color-primary);
+    opacity: 0.1;
+  }
 }
 </style>

@@ -8,12 +8,27 @@
     </template>
 
     <form-layout title="基础">
+ 
       <sFormLayout :rate="50" title="留白">
+        <template #title>
+        留白
+        <el-tooltip content="类目型一般需要留白" placement="top">
+          <el-icon><Warning /></el-icon>
+        </el-tooltip>
+      </template>
         <el-switch size="small" v-model="yAxis.boundaryGap"></el-switch>
+      </sFormLayout>
+      <sFormLayout :rate="50" title="类型">
+        <el-select size="small" v-model="yAxis.type">
+          <el-option label="类目型" value="category"></el-option>
+          <el-option label="数值型" value="value"></el-option>
+        </el-select>
       </sFormLayout>
       <sFormLayout :rate="50" title="分隔段数">
         <el-input-number size="small" v-model="yAxis.splitNumber"></el-input-number>
       </sFormLayout>
+
+     
     </form-layout>
 
     <form-layout title="单位">
@@ -75,6 +90,14 @@
       <sFormLayout :rate="50" title="0刻度对齐">
         <el-switch size="small" v-model="yAxis.axisLine.onZero"></el-switch>
       </sFormLayout>
+
+      <sFormLayout :rate="50" title="位置">
+        <el-select size="small" v-model="yAxis.position">
+          <el-option label="左" value="left"></el-option>
+          <el-option label="右" value="right"></el-option>
+        </el-select>
+      </sFormLayout>
+
       <sFormLayout :rate="50" title="宽度">
         <el-input-number size="small" v-model="yAxis.axisLine.lineStyle.width"></el-input-number>
       </sFormLayout>
@@ -160,12 +183,14 @@ import type { IChartOption, IComponent } from '../../type'
 import formLayout from '@/components/form-layout/index.vue'
 import sFormLayout from '@/components/s-form-layout-small/index.vue'
 import { Warning } from '@element-plus/icons-vue'
-const props = defineProps<{
-  current: IComponent
-}>()
-
+const props = withDefaults(defineProps<{
+  yAxis: any
+  title?: string
+}>(),{
+  title:'Y轴（yAxis）'
+})
 let yAxis = computed(() => {
-  return (props.current.option as IChartOption).yAxis
+  return props.yAxis
 })
 
 let nameTextStylePadding = computed({
@@ -184,14 +209,13 @@ let axisLineSymble = computed({
     } catch (error) {
       return '["none","none"]'
     }
-},
+  },
   set(newVal) {
-    try{
+    try {
       yAxis.value.axisLine.symbol = JSON.parse(newVal)
-    }catch (error) {
-      
-    }
-}})
+    } catch (error) {}
+  }
+})
 </script>
 
 <style lang="scss" scoped>

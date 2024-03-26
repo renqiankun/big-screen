@@ -16,17 +16,21 @@ const props = defineProps<{
 <style lang="scss" scoped>
 .config-wrap {
   width: 100%;
-  ::v-deep(.el-tabs__nav) {
-    float: unset;
-    .el-tabs__item {
-      flex: 1;
+  ::v-deep(.tabs-full-width) {
+    & > .el-tabs__heade {
+      .el-tabs__nav {
+        float: unset;
+        .el-tabs__item {
+          flex: 1;
+        }
+      }
     }
   }
   ::v-deep(.el-collapse) {
     --el-collapse-header-bg-color: transparent;
     --el-collapse-content-bg-color: transparent;
-    .el-collapse-item__content{
-        padding-left: 10px;
+    .el-collapse-item__content {
+      padding-left: 10px;
     }
   }
 }

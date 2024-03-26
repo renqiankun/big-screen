@@ -42,6 +42,7 @@ let marginCom = computed(() => {
     color: var(--screen-primary-text-color);
     display: inline-flex;
     align-items: center;
+    column-gap: 3px;
     
   }
   .content {

@@ -2,14 +2,26 @@
   <el-collapse-item>
     <template #title>
       <div class="title-wrap">
-        <span>X轴（xAxis）</span>
+        <span>{{ title }}</span>
         <el-switch @click.stop="" size="small" v-model="xAxis.show"></el-switch>
       </div>
     </template>
 
     <form-layout title="基础">
       <sFormLayout :rate="50" title="留白">
+        <template #title>
+          <span>留白</span>
+          <el-tooltip content="类目型一般需要留白" placement="top">
+            <el-icon><Warning /></el-icon>
+          </el-tooltip>
+        </template>
         <el-switch size="small" v-model="xAxis.boundaryGap"></el-switch>
+      </sFormLayout>
+      <sFormLayout :rate="50" title="类型">
+        <el-select size="small" v-model="xAxis.type">
+          <el-option label="类目型" value="category"></el-option>
+          <el-option label="数值型" value="value"></el-option>
+        </el-select>
       </sFormLayout>
       <sFormLayout :rate="50" title="分隔段数">
         <el-input-number size="small" v-model="xAxis.splitNumber"></el-input-number>
@@ -72,8 +84,15 @@
           v-model="xAxis.axisLine.lineStyle.color"
         ></el-color-picker>
       </sFormLayout>
+
       <sFormLayout :rate="50" title="0刻度对齐">
         <el-switch size="small" v-model="xAxis.axisLine.onZero"></el-switch>
+      </sFormLayout>
+      <sFormLayout :rate="50" title="位置">
+        <el-select size="small" v-model="xAxis.position">
+          <el-option label="上" value="top"></el-option>
+          <el-option label="下" value="bottom"></el-option>
+        </el-select>
       </sFormLayout>
       <sFormLayout :rate="50" title="宽度">
         <el-input-number size="small" v-model="xAxis.axisLine.lineStyle.width"></el-input-number>
@@ -160,12 +179,14 @@ import type { IChartOption, IComponent } from '../../type'
 import formLayout from '@/components/form-layout/index.vue'
 import sFormLayout from '@/components/s-form-layout-small/index.vue'
 import { Warning } from '@element-plus/icons-vue'
-const props = defineProps<{
-  current: IComponent
-}>()
-
+const props = withDefaults(defineProps<{
+  xAxis: any
+  title?: string
+}>(),{
+  title:'X轴（xAxis）'
+})
 let xAxis = computed(() => {
-  return (props.current.option as IChartOption).xAxis
+  return props.xAxis
 })
 
 let nameTextStylePadding = computed({
@@ -184,14 +205,13 @@ let axisLineSymble = computed({
     } catch (error) {
       return '["none","none"]'
     }
-},
+  },
   set(newVal) {
-    try{
+    try {
       xAxis.value.axisLine.symbol = JSON.parse(newVal)
-    }catch (error) {
-      
-    }
-}})
+    } catch (error) {}
+  }
+})
 </script>
 
 <style lang="scss" scoped>
