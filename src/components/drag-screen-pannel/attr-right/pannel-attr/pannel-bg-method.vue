@@ -54,3 +54,4 @@ const emits = defineEmits(['update:modelValue'])
   }
 }
 </style>
+../../types/type

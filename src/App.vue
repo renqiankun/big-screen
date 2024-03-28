@@ -18,4 +18,4 @@ const pannel = reactive<IPannel>({
 
 <style lang="scss" scoped>
 
-</style>
+</style>./components/drag-screen-pannel/types/type

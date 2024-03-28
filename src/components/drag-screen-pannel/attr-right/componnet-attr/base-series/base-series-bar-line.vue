@@ -48,6 +48,16 @@
     <sFormLayout :rate="50" title="宽度">
       <el-input-number v-model="seriesItem.lineStyle.width" size="small"></el-input-number>
     </sFormLayout>
+
+    <sFormLayout :rate="50" title="阶梯线">
+      <el-select size="small" v-model="seriesItem.step" clearable>
+        <el-option label="否" :value="false"></el-option>
+        <el-option label="是" :value="true"></el-option>
+        <el-option label="当前点" value="start"></el-option>
+        <el-option label="中间点" value="middle"></el-option>
+        <el-option label="下个点" value="end"></el-option>
+      </el-select>
+    </sFormLayout>
   </formLayout>
 
   <formLayout v-if="isLine" title="图标">
@@ -106,7 +116,7 @@
   </formLayout>
 
   <formLayout title="堆叠">
-    <sFormLayout :rate="50" title="堆叠值">
+    <sFormLayout :rate="50" title="堆叠值" desc="堆叠值一致的系列会进行堆叠">
       <el-input size="small" v-model="seriesItem.stack"></el-input>
     </sFormLayout>
     <sFormLayout :rate="50" title="堆叠方式">
@@ -137,14 +147,14 @@
 </template>
 
 <script setup lang="ts">
-import type { barLineSeries } from '../../../type'
+import type { IbarLineSeries } from '../../../types/base'
 import formLayout from '@/components/form-layout/index.vue'
 import sFormLayout from '@/components/s-form-layout-small/index.vue'
 import { computed } from 'vue'
 
 const props = withDefaults(
   defineProps<{
-    seriesItem: barLineSeries
+    seriesItem: IbarLineSeries
     option:any
   }>(),
   {}
@@ -177,3 +187,4 @@ const emits = defineEmits(['update:barGap'])
 </script>
 
 <style lang="scss" scoped></style>
+../../../types/type

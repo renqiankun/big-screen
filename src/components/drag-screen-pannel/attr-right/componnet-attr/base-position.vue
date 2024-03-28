@@ -74,3 +74,4 @@ let positionList = [
   align-items: center;
 }
 </style>
+../../types/type

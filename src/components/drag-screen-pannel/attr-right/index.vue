@@ -29,3 +29,4 @@ const props = defineProps<{
 
 }
 </style>
+../types/type

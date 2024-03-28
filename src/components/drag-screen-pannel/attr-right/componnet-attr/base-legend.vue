@@ -133,3 +133,4 @@ let iconList = [
   }
 }
 </style>
+../../types/type

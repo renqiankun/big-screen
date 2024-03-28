@@ -36,6 +36,7 @@
               :title="item.label"
               :img="item.img"
               :component="item.component || ''"
+              :option="item.option || {}"
             />
           </el-scrollbar>
         </div>
@@ -52,13 +53,16 @@ import { ref, computed, onMounted } from 'vue'
 import leftComponentItem from '../component/left-component-item.vue'
 // import barX from '@/assets/imgs/big-screen/chart/bar_x.png'
 import { Histogram } from '@element-plus/icons-vue'
+import { chartBar, chartLine, charthorBar, chartDoubleYBar } from '../package/chart-bar-line/config'
+import {chartPie ,chartPieflower ,chartPieNan} from '../package/chart-pie/config'
 type menuType = {
   label: string
-  value: number
+  value: number | string
   icon?: any
   img?: string | undefined
   justComponentChild?: boolean
   component?: string
+  option?: any
   children?: menuType[]
 }
 let menuType = ref(1)
@@ -72,24 +76,25 @@ let menuTypeList: Array<menuType> = [
         label: '柱状图',
         value: 1,
         children: [
-          {
-            label: '柱状图1',
-            value: 11,
-            img: 'bar_x',
-            component:'chart-bar-line'
-          },
-          // { label: '柱状图2', value: 22, img: 'bar_x' }
+          { ...chartBar, value: 11 },
+          { ...charthorBar, value: 33 }
         ]
       },
       {
         label: '折线图',
         value: 2,
         children: [
-          { label: '折现1', value: 11, img: '' },
-          { label: '折现2', value: 22, img: '' }
+          { ...chartLine, value: '2-1' },
+          { ...chartDoubleYBar, value: 44 }
         ]
       },
-      { label: '饼图', value: 3 },
+      { label: '饼图', value: 3 ,
+      children:[
+        { ...chartPie, value: '3-1' },
+        { ...chartPieNan, value: '3-3' },
+        { ...chartPieflower, value: '3-2' },
+      ]
+    },
       { label: '散点图', value: 4 },
       { label: '地图', value: 5 }
     ]

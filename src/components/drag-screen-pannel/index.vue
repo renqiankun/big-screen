@@ -298,3 +298,4 @@ const onContextMenu = (e: any) => {
   top: 0;
 }
 </style>
+./types/type

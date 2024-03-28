@@ -2,7 +2,7 @@
   <el-collapse-item>
     <template #title>
       <div class="title-wrap">
-        <span>Y轴（yAxis）</span>
+        <span>{{ title }}</span>
         <el-switch @click.stop="" size="small" v-model="yAxis.show"></el-switch>
       </div>
     </template>
@@ -179,7 +179,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import type { IChartOption, IComponent } from '../../type'
+import type { IChartOption, IComponent } from '../../types/type'
 import formLayout from '@/components/form-layout/index.vue'
 import sFormLayout from '@/components/s-form-layout-small/index.vue'
 import { Warning } from '@element-plus/icons-vue'
@@ -226,3 +226,4 @@ let axisLineSymble = computed({
   align-items: center;
 }
 </style>
+../../types/type

@@ -44,3 +44,4 @@ let h = computed({
   align-items: center;
 }
 </style>
+../../types/type

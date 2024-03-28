@@ -1,16 +1,25 @@
 <template>
   <div class="config-wrap">
-    <chartBarLineConfig :pannel="pannel" :current="current" />
+    <chartBarLineConfig v-if="isBar" :pannel="pannel" :current="current" />
+    <chartPieConfig v-else-if="isPie" :pannel="pannel" :current="current" />
   </div>
 </template>
 
 <script setup lang="ts">
-import type { IComponent, IPannel } from '../type'
+import { computed } from 'vue';
+import type { IComponent, IPannel } from '../types/type'
 import chartBarLineConfig from '@/components/drag-screen-pannel/package/chart-bar-line/config.vue'
+import chartPieConfig from '@/components/drag-screen-pannel/package/chart-pie/config.vue'
 const props = defineProps<{
   pannel: IPannel
   current: IComponent
 }>()
+let isBar = computed(()=>{
+  return props.current.baseConfig.component === 'chart-bar-line'
+})
+let isPie = computed(()=>{
+  return props.current.baseConfig.component === 'chart-pie'
+})
 </script>
 
 <style lang="scss" scoped>
@@ -35,3 +44,4 @@ const props = defineProps<{
   }
 }
 </style>
+../types/type

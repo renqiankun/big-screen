@@ -13,7 +13,7 @@
 
 <script setup lang="ts">
 import { nextTick, onBeforeUnmount, onMounted, reactive, ref } from 'vue'
-import { type IPannel } from '../type'
+import { type IPannel } from '../types/type'
 import { getComponentRotatedStyle } from '@/utils'
 const props = defineProps<{
   pannel: IPannel
@@ -56,6 +56,12 @@ const mouseMove = (e: any) => {
   if (y < initStartY) {
     dataForm.start.y = y
   }
+
+  if (x == initStartX && y == initStartY) {
+    return
+  }
+  emits('update:areaSelecting', true)
+  getSelectArea()
 }
 const mouseUp = async (e: any) => {
   isSelect = false

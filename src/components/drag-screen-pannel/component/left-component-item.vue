@@ -13,13 +13,14 @@
 </template>
 
 <script setup lang="ts">
-import { commonOptionMap } from '../constant';
-import type { IComponent } from '../type'
+import type { IGlobalRequest, IRquest } from '../types/request';
+import type { IComponent } from '../types/type'
 import imgThumb from './img-thumb.vue'
 const props = defineProps<{
   title: string
   img?: string | undefined
   component: string
+  option: any
 }>()
 
 const handleDragStart = (e: any) => {
@@ -37,8 +38,9 @@ const handleDragStart = (e: any) => {
       label: props.title as string,
       component: props.component as string
     },
-    option:commonOptionMap[props.component as keyof typeof commonOptionMap]||{},
-    request:{}
+    option:props.option,
+    globalRequest:{} as IGlobalRequest,
+    request:{} as IRquest
   }
   e.dataTransfer.setData('component', JSON.stringify(data))
 }
@@ -87,3 +89,4 @@ const handleDragStart = (e: any) => {
   }
 }
 </style>
+../types/type

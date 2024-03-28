@@ -1,6 +1,6 @@
 <template>
   <el-button style="width: 100%; border: none">
-    <el-icon style="margin-right: 4px;"><DataBoard /></el-icon>
+    <el-icon style="margin-right: 4px"><DataBoard /></el-icon>
     页面配置
   </el-button>
   <pannelSize class="reset-margin" :pannel="pannel" />
@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import type { IPannel } from '../type'
+import type { IPannel } from '../types/type'
 import pannelSize from './pannel-attr/pannel-size.vue'
 import pannelBg from './pannel-attr/pannel-bg.vue'
 import pannelBgMethod from './pannel-attr/pannel-bg-method.vue'
@@ -30,3 +30,4 @@ const props = withDefaults(
   margin-bottom: 15px;
 }
 </style>
+../types/type

@@ -237,3 +237,4 @@ const initEvent = () => {
   }
 }
 </style>
+../../types/type

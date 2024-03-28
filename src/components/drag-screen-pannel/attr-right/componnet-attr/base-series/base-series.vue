@@ -23,9 +23,10 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import type { IComponent, barLineSeries, IChartOption } from '../../../type'
+import type { IComponent,IChartOption } from '../../../types/type'
 import baseSeriesBarLine from './base-series-bar-line.vue'
 import { Plus } from '@element-plus/icons-vue'
+import type { IbarLineSeries } from '@/components/drag-screen-pannel/types/base';
 const props = defineProps<{
   current: IComponent
 }>()
@@ -37,7 +38,7 @@ let series = computed(() => {
 const editableTabsValue = ref(0)
 
 const addType = () => {
-  let item: barLineSeries = {
+  let item: IbarLineSeries = {
     type: 'bar',
     backgroundStyle: {},
     itemStyle: {},
@@ -75,3 +76,4 @@ const addType = () => {
   }
 }
 </style>
+../../../types/type

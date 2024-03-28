@@ -45,3 +45,4 @@ let grid = computed(() => {
 }
 
 </style>
+../../types/type
