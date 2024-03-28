@@ -20,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-import type { IPannel } from '../../type'
+import type { IPannel } from '../../types/type'
 
 const props = defineProps<{
   pannel: IPannel

@@ -76,7 +76,7 @@
 
 <script setup lang="ts">
 import formLayout from '@/components/form-layout/index.vue'
-import type { IChartOption, IComponent } from '../../type'
+import type { IChartOption, IComponent } from '../../types/type'
 import { computed } from 'vue'
 import sFormLayout from '@/components/s-form-layout-small/index.vue'
 const props = defineProps<{

@@ -31,8 +31,7 @@ import { computed, nextTick, onMounted, reactive, ref } from 'vue'
 import { SketchRule } from 'vue3-sketch-ruler'
 import 'vue3-sketch-ruler/lib/style.css'
 import { debounce } from 'lodash-es'
-import { type IPannel } from '../../type'
-import { getUUID } from '@/utils';
+import { type IPannel } from '../../types/type'
 const props = withDefaults(
   defineProps<{
     pannel: IPannel

@@ -12,7 +12,7 @@
 
 <script setup lang="ts">
 import formLayout from '@/components/form-layout/index.vue'
-import type { IComponent, IPannel } from '../../type'
+import type { IComponent, IPannel } from '../../types/type'
 import { computed } from 'vue'
 const porps = defineProps<{
   current: IComponent

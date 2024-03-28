@@ -21,7 +21,7 @@
 <script setup lang="ts">
 import { Picture ,CircleClose} from '@element-plus/icons-vue'
 import fileSelect from '../../component/file-select.vue'
-import type { IPannel } from '../../type'
+import type { IPannel } from '../../types/type'
 import { computed } from 'vue'
 let accept = '.png,.gif,.jpeg,.jpg'
 const props = defineProps<{

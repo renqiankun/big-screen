@@ -7,7 +7,7 @@
 <script setup lang="ts">
 import * as echarts from 'echarts'
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
-import type { IChartOption, IComponent } from '../../type'
+import type { IChartOption, IComponent } from '../../types/type'
 import { hideTooTipHand, destroyHand } from '../utils'
 import dataJson from './data.json'
 const props = withDefaults(
