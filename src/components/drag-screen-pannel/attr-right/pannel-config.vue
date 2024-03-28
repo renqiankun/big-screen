@@ -7,15 +7,18 @@
   <pannelBg class="reset-margin" v-model="pannel.bgImg" :pannel="pannel" />
   <pannelBgMethod class="reset-margin" v-model="pannel.bgMethod" :pannel="pannel" />
   <pannelBgColor class="reset-margin" v-model="pannel.bgColor" />
+  <globalVariable class="reset-margin" v-model:globalVariable="pannel.globalVariable" />
 </template>
 
 <script setup lang="ts">
+import { DataBoard } from '@element-plus/icons-vue'
 import type { IPannel } from '../types/type'
 import pannelSize from './pannel-attr/pannel-size.vue'
 import pannelBg from './pannel-attr/pannel-bg.vue'
 import pannelBgMethod from './pannel-attr/pannel-bg-method.vue'
 import pannelBgColor from './pannel-attr/pannel-bg-color.vue'
-import { DataBoard } from '@element-plus/icons-vue'
+import globalVariable from '@/components/drag-screen-pannel/attr-right/pannel-attr/global-variable/globalVariable.vue'
+
 const props = withDefaults(
   defineProps<{
     pannel: IPannel

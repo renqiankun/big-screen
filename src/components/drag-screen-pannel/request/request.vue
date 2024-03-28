@@ -1,5 +1,5 @@
 <template>
-  <!-- <global :global-request="globalRequest"/> -->
+  <global  :globalVariable='globalVariable' v-model:globalRequest="globalRequestCom"/>
 
   <div class="screen-pannel-request-wrap">
     <formLayout title="接口">
@@ -25,7 +25,7 @@
     </div>
   </div>
 
-  <requetUpdate v-model="requestCom" ref='reqRef'/>
+  <requetUpdate  :globalVariable='globalVariable' v-model="requestCom" ref='reqRef'/>
 </template>
 
 <script setup lang="ts">
@@ -39,6 +39,7 @@ const props = withDefaults(
   defineProps<{
     globalRequest: IGlobalRequest
     request: IRquest
+    globalVariable:any
   }>(),
   {}
 )
@@ -48,6 +49,15 @@ const requestCom = computed({
   },
   set(val){
     emit('update:request', val)
+  } 
+})
+
+const globalRequestCom = computed({
+  get(){
+    return props.globalRequest
+  },
+  set(val){
+    emit('update:globalRequest', val)
   } 
 })
 let reqRef = ref()

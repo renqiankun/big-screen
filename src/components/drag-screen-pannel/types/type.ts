@@ -1,5 +1,5 @@
 import type { ITooltip, IbarLineSeries, IbarxAxis, IbaryAxis, Igrid, Ilegend, IpieSeries } from "./base"
-import type { IRquest } from "./request"
+import type { IRquest,IGlobalRequest } from "./request"
 
 export type IPannel = {
   scale: number
@@ -10,6 +10,9 @@ export type IPannel = {
   bgMethod?: any // 背景size  cover、container、100% 100%
   colors?: any[]
   components: IComponent[]
+  globalVariable: Record<any, any>
+  // 全局请求信息
+  globalRequest: IGlobalRequest
 }
 
 export type IComponent = {
@@ -29,8 +32,7 @@ export type IComponent = {
   baseConfig: IBaseConfig
   // 各种组件的配置信息
   option: IChartOption | TextOption | Object
-  // 全局请求信息
-  globalRequest: IRquest
+
   // 请求信息
   request: IRquest
 }

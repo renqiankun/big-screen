@@ -4,11 +4,15 @@
       <baseName v-model="current.baseConfig.label" />
       <baseSize :current="current" />
       <basePosition :current="current" :pannel="pannel" />
+
       <!-- echarts配置开始 -->
-      <el-collapse v-model="chartActive">
+      <el-collapse style="margin-top: 15px;" v-model="chartActive">
+    
+
         <el-collapse-item title="容器（grid）">
           <baseGrid :current="current" />
         </el-collapse-item>
+
         <baseLegend :current="current" />
         <!-- x轴配置 -->
         <baseX :x-axis="option.xAxis[0]" />
@@ -18,12 +22,12 @@
         <!-- x轴配置 -->
         <baseX title="X轴-2（xAxis）" v-if="option.xAxis[1]" :x-axis="option.xAxis[1]" />
         <!-- y轴配置 -->
-        <baseY  title="Y轴-2（yAxis）"  v-if="option.yAxis[1]" :y-axis="option.yAxis[1]" />
+        <baseY title="Y轴-2（yAxis）" v-if="option.yAxis[1]" :y-axis="option.yAxis[1]" />
         <baseSeries :current="current" />
       </el-collapse>
     </el-tab-pane>
     <el-tab-pane label="接口" name="second">
-      <request v-model:request="current.request" :global-request="current.globalRequest"/>
+      <request v-model:request="current.request" v-model:globalRequest="pannel.globalRequest" :globalVariable="pannel.globalVariable"/>
     </el-tab-pane>
   </el-tabs>
 </template>
@@ -40,6 +44,7 @@ import baseY from '@/components/drag-screen-pannel/attr-right/componnet-attr/bas
 import baseSeries from '@/components/drag-screen-pannel/attr-right/componnet-attr/base-series/base-series.vue'
 import request from '@/components/drag-screen-pannel/request/request.vue'
 import { computed, ref } from 'vue'
+
 const props = defineProps<{
   pannel: IPannel
   current: IComponent

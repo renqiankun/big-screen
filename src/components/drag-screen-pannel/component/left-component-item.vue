@@ -39,7 +39,7 @@ const handleDragStart = (e: any) => {
       component: props.component as string
     },
     option:props.option,
-    globalRequest:{} as IGlobalRequest,
+
     request:{} as IRquest
   }
   e.dataTransfer.setData('component', JSON.stringify(data))

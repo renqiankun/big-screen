@@ -10,7 +10,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import pannelConfig from './pannel-config.vue';
-import type { IComponent, IPannel } from '../type';
+import type { IComponent, IPannel } from '../types/type';
 import componentConfig from './component-config.vue';
 const props = defineProps<{
     pannel:IPannel
