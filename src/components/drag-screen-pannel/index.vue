@@ -1,5 +1,8 @@
 <template>
   <Layout>
+    <template #nav>
+      <navBar :pannel="pannel" />
+    </template>
     <template #left>
       <toolLeft />
     </template>
@@ -42,7 +45,7 @@
             @rotating="(rotate: any) => onRotating(rotate, item)"
             @rotatestop="(rotate: any) => onRotating(rotate, item)"
           >
-            <component :is='item.baseConfig.component' :config='item'></component>
+            <component :is="item.baseConfig.component" :config="item"></component>
           </VueDragResizeRotate>
           <subLine ref="subLineRef" />
           <Area
@@ -57,7 +60,7 @@
     </template>
 
     <template #right>
-      <attrRight :pannel="pannel" :current="current"/>
+      <attrRight :pannel="pannel" :current="current" />
     </template>
   </Layout>
 </template>
@@ -77,6 +80,7 @@ import { useClipboard } from '@vueuse/core'
 import '@imengyu/vue3-context-menu/lib/vue3-context-menu.css'
 import ContextMenu from '@imengyu/vue3-context-menu'
 import attrRight from './attr-right/index.vue'
+import navBar from './nav-bar/nav-bar.vue'
 const props = defineProps<{
   pannel: IPannel
 }>()
@@ -250,8 +254,8 @@ const dropHand = (e: any) => {
   let width = component.w
   let height = component.h
   if (component) {
-    component.x = x / scale - width/2
-    component.y = y / scale - height/2
+    component.x = x / scale - width / 2
+    component.y = y / scale - height / 2
     component.id = getUUID()
     props.pannel.components.push(component)
   }

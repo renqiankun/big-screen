@@ -7,18 +7,18 @@
     append-to-body
     destroy-on-close
   >
-    <el-form ref="formRef" label-width="100px" :model="dataForm" :rules="rules">
+    <el-form ref="formRef" label-width="120px" label-position="left" odel="dataForm" :rules="rules">
       <el-form-item label="接口地址" prop="baseUrl" >
         <el-input v-model="dataForm.baseUrl" placeholder="http://egg/com"></el-input>
       </el-form-item>
-      <el-form-item label="间隔（秒）" prop="interval">
+      <el-form-item label="间隔（毫秒）" prop="interval">
         <el-input-number
           class="reset-input-number--left"
           controls-position="right"
           v-model="dataForm.interval"
         ></el-input-number>
       </el-form-item>
-      <el-form-item label="超时（秒）" prop="timeout">
+      <el-form-item label="超时（毫秒）" prop="timeout">
         <el-input-number
           class="reset-input-number--left"
           controls-position="right"

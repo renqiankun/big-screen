@@ -40,7 +40,7 @@ const handleDragStart = (e: any) => {
     },
     option:props.option,
 
-    request:{} as IRquest
+    request:{ dataType:'form-data' } as IRquest
   }
   e.dataTransfer.setData('component', JSON.stringify(data))
 }

@@ -8,7 +8,7 @@
     destroy-on-close
     @closed="clearHand"
   >
-    <el-form ref="formRef" label-width="100px" :model="dataForm" :rules="rules">
+    <el-form ref="formRef" label-width="120px"  label-position="left"  :model="dataForm" :rules="rules">
       <el-form-item label="接口地址" prop="url">
         <el-input v-model="dataForm.url" placeholder="/egg"></el-input>
       </el-form-item>
@@ -19,7 +19,7 @@
           <el-option label="PUT" value="PUT"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="间隔（秒）" prop="interval">
+      <el-form-item label="间隔（毫秒）" prop="interval">
         <el-input-number
           class="reset-input-number--left"
           controls-position="right"
@@ -90,7 +90,12 @@
           </el-table-column>
         </el-table>
       </el-tab-pane>
-      <el-tab-pane label="data">
+      <el-tab-pane label="body">
+        <el-radio-group v-model="dataForm.dataType">
+          <el-radio value="form-data">form-data</el-radio>
+          <el-radio value="json">json</el-radio>
+          <el-radio value="x-www-form-urlencoded">x-www-form-urlencoded</el-radio>
+        </el-radio-group>
         <el-table border :data="dataForm.data">
           <el-table-column
             header-align="center"
@@ -145,6 +150,7 @@ let dataForm = reactive<IRquest>({
   url: '',
   interval: 0,
   method: '',
+  dataType: 'form-data',
   headers: [],
   params: [],
   data: []

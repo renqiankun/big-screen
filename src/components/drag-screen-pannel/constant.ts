@@ -177,6 +177,7 @@ export let chartPieSeries = {
 
 
 export let defaultVariabelType  = '1'
+export let useGlobalVariableType  = '2'
 export const variableTypeList = [
   {value:'1',label:'自定义值'},
   {value:'2',label:'全局变量'},

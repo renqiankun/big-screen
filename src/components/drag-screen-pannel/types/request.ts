@@ -7,7 +7,7 @@ export  type Iparams = {
 export type IGlobalRequest = {
   baseUrl: string
   timeout?: number
-  headers?: any
+  headers?: Array<Iparams>
   interval?: number
   // 请求超时时间 秒
 }
@@ -15,12 +15,11 @@ export type IGlobalRequest = {
 export type IRquest = {
   url?: string
   method?: string | 'GET' | 'POST' | 'PUT' | 'DELETE'
+  dataType: 'form-data' | 'json' | 'x-www-form-urlencoded'
   // 请求头
   headers: Array<Iparams>
   params: Array<Iparams>
   data: Array<Iparams>
 
   interval?: number
-  // 响应类型
-  responseType?: 'json' | 'text' | 'blob' | 'arraybuffer'
 }

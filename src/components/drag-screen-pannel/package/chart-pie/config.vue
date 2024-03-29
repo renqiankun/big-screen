@@ -10,7 +10,9 @@
         <pieNomal :current="current" />
       </el-collapse>
     </el-tab-pane>
-    <el-tab-pane label="Config" name="second">Config</el-tab-pane>
+    <el-tab-pane label="接口" name="second">
+      <request v-model:request="current.request" v-model:globalRequest="pannel.globalRequest" :globalVariable="pannel.globalVariable"/>
+    </el-tab-pane>
   </el-tabs>
 </template>
 
@@ -22,6 +24,7 @@ import basePosition from '@/components/drag-screen-pannel/attr-right/componnet-a
 import baseLegend from '@/components/drag-screen-pannel/attr-right/componnet-attr/base-legend.vue'
 import pieNomal from '@/components/drag-screen-pannel/attr-right/componnet-attr/pie-normal.vue'
 import { computed, ref } from 'vue'
+import request from '@/components/drag-screen-pannel/request/request.vue'
 const props = defineProps<{
   pannel: IPannel
   current: IComponent
