@@ -10,7 +10,10 @@
     destroy-on-close
     align-center
   >
-    <bigScreenPreview :pannel="pannel" :global-variable="globalVariable" :dev="dev" />
+    <bigScreenPreview :pannel="pannel" 
+    :global-variable="globalVariable" 
+    :pannelGlobalVariable="pannel.globalVariable"
+    :dev="dev" />
   </el-dialog>
 </template>
 

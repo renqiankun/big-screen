@@ -80,7 +80,8 @@ let desc = `
     因大屏预览时接口配置独立与业务平台，</br>
     无法共用业务平台中诸如axios的拦截器，</br>
     类似header上token添加则可通过全局变量定义，</br>
-    在预览组件中使用:globalVariable="{token: '123456'}"
+    在预览组件中使用:globalVariable="{token: '123'}",</br>
+    进行合并，预览组件中传入的变量优先级高于此全局变量
 `
 
 let info = reactive({

@@ -17,11 +17,13 @@ const props = withDefaults(
     dev?: boolean // 开发模式
     config: IComponent
     globalRequest?: IGlobalRequest
+    pannelGlobalVariable?: Record<any, any>
     globalVariable?: Record<any, any>
   }>(),
   {
     dev: true,
     globalRequest: () => ({}) as IGlobalRequest,
+    pannelGlobalVariable: () => ({}),
     globalVariable: () => ({})
   }
 )
@@ -65,7 +67,10 @@ const getHttpData = async () => {
   let params = {
     globalRequest: props.globalRequest as IGlobalRequest,
     request: props.config.request,
-    globalVariable: props.globalVariable
+    globalVariable: {
+      ...props.pannelGlobalVariable,
+      ...props.globalVariable
+    }
   }
   let res = await httpHand(params)
   return res || []
