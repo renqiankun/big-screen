@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="margin-bottom: 15px;">
     <div class="positon-wrap">
     <div class="positon-item" v-for="item in positionList">
       <img class="position-img" :src="item.icon" alt="" />
@@ -26,7 +26,7 @@ import bottom from '@/assets/imgs/big-screen/icon/bottom.svg'
 import top from '@/assets/imgs/big-screen/icon/top.svg'
 import xCenter from '@/assets/imgs/big-screen/icon/x-center.svg'
 import yCenter from '@/assets/imgs/big-screen/icon/y-center.svg'
-import type { IComponent } from '../../type';
+import type { IComponent } from '../../types/type';
 
 const props = defineProps<{
   current: IComponent

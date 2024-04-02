@@ -6,25 +6,22 @@
 
 <script setup lang="ts">
 import * as echarts from 'echarts'
-import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import type { IChartOption, IComponent } from '../../types/type'
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, toRef, watch, type Ref } from 'vue'
+import type { IChartOption, IComponent, IPannel } from '../../types/type'
 import { hideTooTipHand, destroyHand } from '../utils'
 import dataJson from './data.json'
 import type { IGlobalRequest } from '../../types/request'
-import { httpHand } from '../http/http'
+import { useHttpHand } from '../http/http'
 const props = withDefaults(
   defineProps<{
-    dev?: boolean // 开发模式
+    dev?: boolean // 开发模式  静态数据或 http请求数据
     config: IComponent
-    globalRequest?: IGlobalRequest
-    pannelGlobalVariable?: Record<any, any>
+    pannel: IPannel
+    // 预览组件传入的业务全局变量
     globalVariable?: Record<any, any>
   }>(),
   {
-    dev: true,
-    globalRequest: () => ({}) as IGlobalRequest,
-    pannelGlobalVariable: () => ({}),
-    globalVariable: () => ({})
+    dev: true
   }
 )
 let isDev = computed(() => props.dev)
@@ -34,19 +31,7 @@ let chartOption = computed<IChartOption>(() => {
   return props.config.option as IChartOption
 })
 
-let unwatchSize: any = null
-let unwatchOption: any = null
-onMounted(() => {
-  if (isDev.value) {
-    initWatch()
-  }else{
-    init()
-  }
-})
-
 onBeforeUnmount(() => {
-  unwatchSize?.()
-  unwatchOption?.()
   destroyHand(myChart)
 })
 
@@ -55,41 +40,39 @@ const init = async () => {
   if (!myChart) {
     myChart = echarts.init(nodeRef.value)
   }
-  let data = await getHttpData()
   let option = {
     ...chartOption.value,
-    dataset: isDev.value ? dataJson : data
+    dataset: isDev.value ? dataJson : httpData.value || []
   }
   hideTooTipHand(myChart)
   myChart.setOption(option)
 }
-const getHttpData = async () => {
-  let params = {
-    globalRequest: props.globalRequest as IGlobalRequest,
-    request: props.config.request,
+let requestParams = computed(() => {
+  return {
+    globalRequest: props.pannel.globalRequest ?? ({} as IGlobalRequest),
+    request: props.config.request ?? {},
     globalVariable: {
-      ...props.pannelGlobalVariable,
+      ...props.pannel.globalVariable,
       ...props.globalVariable
     }
   }
-  let res = await httpHand(params)
-  return res || []
-}
-const initWatch = () => {
-  unwatchSize = watch(
-    () => [props.config.x, props.config.y],
-    () => {
-      myChart?.resize()
-    }
-  )
-  unwatchOption = watch(
-    () => chartOption,
-    (newVal) => {
-      init()
-    },
-    { deep: true, flush: 'post', immediate: true }
-  )
-}
+})
+// 接口数据
+let httpData: Ref = useHttpHand(requestParams, init)
+
+watch(
+  () => [props.config.x, props.config.y],
+  () => {
+    myChart?.resize()
+  }
+)
+watch(
+  () => chartOption,
+  (newVal) => {
+    init()
+  },
+  { deep: true, flush: 'post', immediate: true }
+)
 </script>
 
 <style lang="scss" scoped></style>

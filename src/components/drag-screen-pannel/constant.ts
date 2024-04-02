@@ -182,3 +182,29 @@ export const variableTypeList = [
   {value:'1',label:'自定义值'},
   {value:'2',label:'全局变量'},
 ]
+
+
+/**
+ * date-picker
+ */
+
+export const datePickerTypeList = [
+  {value:'year',label:'年'},
+  {value:'month',label:'月'},
+  {value:'date',label:'日'},
+  {value:'week',label:'周'},
+  {value:'datetime',label:'时间'},
+  // {value:'years',label:'多年'},
+  // {value:'dates',label:'多日'},
+  {value:'datetimerange',label:'时间范围'},
+  {value:'daterange',label:'日期范围'},
+  {value:'monthrange',label:'月份范围'},
+]
+export let datePickermutilList = ['datetimerange', 'daterange', 'monthrange']
+export const datePickerNow = 'now'
+export const datePickerFix = 'fix'
+export const datePickerDefaultTypes = [
+  {value:'',label:'无'},
+  {value:'now',label:'当前时间'},
+  {value:'fix',label:'固定时间'},
+]

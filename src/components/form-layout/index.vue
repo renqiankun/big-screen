@@ -47,6 +47,7 @@ let marginCom = computed(() => {
   }
   .content {
     flex: 1;
+    overflow: hidden;
   }
 }
 </style>

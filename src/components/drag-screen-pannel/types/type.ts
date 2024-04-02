@@ -42,6 +42,7 @@ export type IBaseConfig = {
   label: string // 缩略标题
   img: string // 缩略图
   component: string // 组件名称
+  configComponent?:string
 }
 
 // 组件属性

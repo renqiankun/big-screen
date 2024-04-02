@@ -1,25 +1,31 @@
 <template>
   <div class="config-wrap">
-    <chartBarLineConfig v-if="isBar" :pannel="pannel" :current="current" />
-    <chartPieConfig v-else-if="isPie" :pannel="pannel" :current="current" />
+    <component :is="dyComponent" v-if="dyComponent" :pannel="pannel" :current="current" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue';
 import type { IComponent, IPannel } from '../types/type'
-import chartBarLineConfig from '@/components/drag-screen-pannel/package/chart-bar-line/config.vue'
-import chartPieConfig from '@/components/drag-screen-pannel/package/chart-pie/config.vue'
+// import chartBarLineConfig from '@/components/drag-screen-pannel/package/chart-bar-line/config.vue'
+// import chartPieConfig from '@/components/drag-screen-pannel/package/chart-pie/config.vue'
 const props = defineProps<{
   pannel: IPannel
   current: IComponent
 }>()
-let isBar = computed(()=>{
-  return props.current.baseConfig.component === 'chart-bar-line'
+
+let dyComponent = computed(()=>{
+  return props.current.baseConfig.configComponent || ''
 })
-let isPie = computed(()=>{
-  return props.current.baseConfig.component === 'chart-pie'
-})
+// let isBar = computed(()=>{
+//   return props.current.baseConfig.component === 'chart-bar-line'
+// })
+// let isPie = computed(()=>{
+//   return props.current.baseConfig.component === 'chart-pie'
+// })
+// let isDatePicker = computed(()=>{
+//   return props.current.baseConfig.component === 'date-picker'
+// })
 </script>
 
 <style lang="scss" scoped>

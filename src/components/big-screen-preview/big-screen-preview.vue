@@ -3,11 +3,11 @@
     <bigScreenAdaptor :width="pannel.width" :height="pannel.height">
       <div :style="screenContainerStyleHand()" class="big-screen-container">
         <div class="big-screen-component" v-for="item in componentList" :style="getSytleHand(item)">
-          <component :is="item.baseConfig.component" 
-          :dev="dev"
-          :config="item"
-          :globalRequest="pannel.globalRequest"
-          :globalVariable="globalVariable"
+          <component
+            :is="item.baseConfig.component"
+            :dev="dev"
+            :config="item"
+            :pannel="pannel"
           ></component>
         </div>
       </div>

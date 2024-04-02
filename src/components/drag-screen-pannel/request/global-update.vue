@@ -7,7 +7,7 @@
     append-to-body
     destroy-on-close
   >
-    <el-form ref="formRef" label-width="120px" label-position="left" odel="dataForm" :rules="rules">
+    <el-form ref="formRef" label-width="120px" label-position="left" :model="dataForm" :rules="rules">
       <el-form-item label="接口地址" prop="baseUrl" >
         <el-input v-model="dataForm.baseUrl" placeholder="http://egg/com"></el-input>
       </el-form-item>
@@ -65,7 +65,7 @@
 
 <script setup lang="ts">
 import { nextTick, reactive, ref } from 'vue'
-import type { IGlobalRequest, IRquest } from '../types/request'
+import type { IGlobalRequest, IRquest ,Iparams} from '../types/request'
 import { mergeObjHand } from '../utils'
 import { defaultVariabelType } from '../constant';
 import variableInput from '@/components/drag-screen-pannel/component/variable-input.vue'
@@ -79,7 +79,7 @@ let formRef = ref()
 let dataForm = reactive<IGlobalRequest>({
   baseUrl: '',
   interval: 0,
-  headers: [{}]
+  headers: [{} as Iparams]
 })
 let rules = {
   baseUrl: [{ required: true, message: '请输入接口地址', trigger: 'blur' }],
@@ -99,17 +99,17 @@ const init = async (request: IRquest) => {
 const confirmHandler = () => {
   formRef.value?.validate(async (valid: boolean) => {
     if (!valid) return
-    dataForm.headers = dataForm.headers.filter((item:any) => item.name)
-    emits('update:modelValue', dataForm)
+    dataForm.headers = dataForm.headers?.filter?.((item:any) => item.name)
+    emits('update:modelValue', {...dataForm})
     closeHand()
   })
 }
 const addHand = (index: number) => {
-  dataForm.headers.splice(index + 1, 0, { name: '', value: '' ,type: defaultVariabelType})
+  dataForm.headers?.splice?.(index + 1, 0, { name: '', value: '' ,type: defaultVariabelType})
 }
 const delHand = (index: number) => {
   if ((dataForm.headers?.length ?? 0) == 1) return
-  dataForm.headers.splice(index, 1)
+  dataForm.headers?.splice?.(index, 1)
 }
 const closeHand = () => {
   visible.value = false

@@ -55,6 +55,7 @@ let option = computed(() => {
 let activeName = ref('base')
 
 let chartActive = ref('')
+
 </script>
 
 <style lang="scss" scoped></style>

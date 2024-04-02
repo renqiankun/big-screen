@@ -28,6 +28,7 @@ onMounted(() => {
 onBeforeUnmount(() => {
   resizeObserver?.disconnect?.()
   wrapRef.value = null
+  window.removeEventListener('resize', getSytpeMapHand)
 })
 const getSytpeMapHand = async () => {
   await nextTick()
@@ -63,6 +64,10 @@ const getFitTransforOrigin = (width: number, height: number) => {
 }
 let resizeObserver: any = null
 const lithenResizeHand = () => {
+  if(!window.ResizeObserver){
+    window.addEventListener('resize', getSytpeMapHand)
+    return
+  }
   resizeObserver = new ResizeObserver((entries) => {
     getSytpeMapHand()
   })

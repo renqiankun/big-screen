@@ -17,7 +17,8 @@ const pannel = reactive<IPannel>({
   globalRequest: {} as IGlobalRequest,
   components: []
 })
+
+
 </script>
 
 <style lang="scss" scoped></style>
-./components/drag-screen-pannel/types/type

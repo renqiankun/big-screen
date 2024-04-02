@@ -9,9 +9,11 @@ import '@gausszhou/vue3-drag-resize-rotate/lib/bundle.esm.css'
 import '@/theme/index.scss'
 
 import screenComponets from '@/components/drag-screen-pannel/package/index'
+import screenComponetConfig from '@/components/drag-screen-pannel/package/config-components'
 const app = createApp(App)
 
 app.use(VueDragResizeRotate)
 app.use(elementPlus)
 app.use(screenComponets)
+app.use(screenComponetConfig)
 app.mount('#app')

@@ -45,14 +45,14 @@
             @rotating="(rotate: any) => onRotating(rotate, item)"
             @rotatestop="(rotate: any) => onRotating(rotate, item)"
           >
-            <component :is="item.baseConfig.component" :config="item"></component>
+            <component :is="item.baseConfig.component" :config="item" :pannel="pannel"></component>
           </VueDragResizeRotate>
           <subLine ref="subLineRef" />
           <Area
             v-model:areaSelecting="isAreaSelect"
             v-if="contentRef"
             :content="contentRef"
-            :pannel="props.pannel"
+            :pannel="pannel"
             :current="current"
           />
         </div>

@@ -35,11 +35,10 @@ const props = withDefaults(
 )
 const requestCom = computed({
   get(){
-    console.log( props.globalRequest)
     return props.globalRequest
   },
   set(val){
-    emit('update:globalRequest', val)
+    emit('update:globalRequest', {...val})
   } 
 })
 let reqRef = ref()

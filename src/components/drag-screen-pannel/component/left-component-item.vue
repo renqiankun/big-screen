@@ -13,34 +13,38 @@
 </template>
 
 <script setup lang="ts">
-import type { IGlobalRequest, IRquest } from '../types/request';
+import type { IGlobalRequest, IRquest } from '../types/request'
 import type { IComponent } from '../types/type'
 import imgThumb from './img-thumb.vue'
 const props = defineProps<{
   title: string
   img?: string | undefined
   component: string
+  configComponent?:string
   option: any
+  w?: number
+  h?: number
 }>()
 
 const handleDragStart = (e: any) => {
   let data: IComponent = {
     x: 0,
     y: 0,
-    w: 500,
-    h: 300,
+    w: props.w || 500,
+    h: props.h || 300,
     id: null,
-    r:0,
-    active:false,
-    preventDeactivation:false,
+    r: 0,
+    active: false,
+    preventDeactivation: false,
     baseConfig: {
       img: props.img as string,
       label: props.title as string,
-      component: props.component as string
+      component: props.component as string,
+      configComponent:props.configComponent as string
     },
-    option:props.option,
+    option: props.option,
 
-    request:{ dataType:'form-data' } as IRquest
+    request: { dataType: 'form-data' } as IRquest
   }
   e.dataTransfer.setData('component', JSON.stringify(data))
 }
@@ -74,6 +78,7 @@ const handleDragStart = (e: any) => {
     flex: 1;
     box-sizing: border-box;
     padding: 6px 11%;
+    overflow: hidden;
     .img-wrap {
       width: 100%;
       height: 100%;

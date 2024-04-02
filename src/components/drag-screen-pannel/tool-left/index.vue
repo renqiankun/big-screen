@@ -37,6 +37,9 @@
               :img="item.img"
               :component="item.component || ''"
               :option="item.option || {}"
+              :w="item.w || 0"
+              :h="item.h || 0"
+              :configComponent="item.configComponent"
             />
           </el-scrollbar>
         </div>
@@ -54,14 +57,18 @@ import leftComponentItem from '../component/left-component-item.vue'
 // import barX from '@/assets/imgs/big-screen/chart/bar_x.png'
 import { Histogram } from '@element-plus/icons-vue'
 import { chartBar, chartLine, charthorBar, chartDoubleYBar } from '../package/chart-bar-line/config'
-import {chartPie ,chartPieflower ,chartPieNan} from '../package/chart-pie/config'
+import { chartPie, chartPieflower, chartPieNan } from '../package/chart-pie/config'
+import { datePicker, daterangePicker } from '../package/date-picker/config'
 type menuType = {
   label: string
   value: number | string
   icon?: any
   img?: string | undefined
+  w?:number
+  h?:number
   justComponentChild?: boolean
   component?: string
+  configComponent?: string
   option?: any
   children?: menuType[]
 }
@@ -88,13 +95,15 @@ let menuTypeList: Array<menuType> = [
           { ...chartDoubleYBar, value: 44 }
         ]
       },
-      { label: '饼图', value: 3 ,
-      children:[
-        { ...chartPie, value: '3-1' },
-        { ...chartPieNan, value: '3-3' },
-        { ...chartPieflower, value: '3-2' },
-      ]
-    },
+      {
+        label: '饼图',
+        value: 3,
+        children: [
+          { ...chartPie, value: '3-1' },
+          { ...chartPieNan, value: '3-3' },
+          { ...chartPieflower, value: '3-2' }
+        ]
+      },
       { label: '散点图', value: 4 },
       { label: '地图', value: 5 }
     ]
@@ -105,8 +114,8 @@ let menuTypeList: Array<menuType> = [
     value: 2,
     justComponentChild: true,
     children: [
-      { label: '信息1', icon: '', value: 1 },
-      { label: '信息2', icon: '', value: 2 }
+      { ...datePicker, value: 'info-1' },
+      { ...daterangePicker, value: 'info-2' }
     ]
   },
   {

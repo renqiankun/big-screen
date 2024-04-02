@@ -10,6 +10,7 @@ export const chartPie= {
   label: '饼图',
   img: 'bar_x',
   component: 'chart-pie',
+  configComponent: 'chart-pie-config',
   option: {
     ...chartBaseConfig,
     tooltip: chartPieToolTip,
@@ -21,6 +22,7 @@ export const chartPieNan= {
   label: '南丁格尔图',
   img: 'bar_x',
   component: 'chart-pie',
+  configComponent: 'chart-pie-config',
   option: {
     ...chartBaseConfig,
     tooltip: chartPieToolTip,
@@ -36,6 +38,7 @@ export const chartPieflower= {
   label: '花瓣',
   img: 'bar_x',
   component: 'chart-pie',
+  configComponent: 'chart-pie-config',
   option: {
     ...chartBaseConfig,
     tooltip: chartPieToolTip,
