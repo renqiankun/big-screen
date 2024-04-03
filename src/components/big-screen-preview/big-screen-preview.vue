@@ -2,11 +2,11 @@
   <div class="wrap">
     <bigScreenAdaptor :width="pannel.width" :height="pannel.height">
       <div :style="screenContainerStyleHand()" class="big-screen-container">
-        <div class="big-screen-component" v-for="item in componentList" :style="getSytleHand(item)">
+        <div class="big-screen-component" v-for="(item,index) in componentList" :style="getSytleHand(item)">
           <component
             :is="item.baseConfig.component"
             :dev="dev"
-            :config="item"
+            v-model:config="componentList[index]"
             :pannel="pannel"
           ></component>
         </div>

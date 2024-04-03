@@ -194,13 +194,13 @@ export const datePickerTypeList = [
   {value:'date',label:'日'},
   {value:'week',label:'周'},
   {value:'datetime',label:'时间'},
-  // {value:'years',label:'多年'},
-  // {value:'dates',label:'多日'},
+  {value:'years',label:'多年'},
+  {value:'dates',label:'多日'},
   {value:'datetimerange',label:'时间范围'},
   {value:'daterange',label:'日期范围'},
   {value:'monthrange',label:'月份范围'},
 ]
-export let datePickermutilList = ['datetimerange', 'daterange', 'monthrange']
+export let datePickermutilList = ['datetimerange', 'daterange', 'monthrange','years','dates']
 export const datePickerNow = 'now'
 export const datePickerFix = 'fix'
 export const datePickerDefaultTypes = [

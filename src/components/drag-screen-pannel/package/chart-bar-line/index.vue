@@ -42,10 +42,10 @@ const init = async () => {
   }
   let option = {
     ...chartOption.value,
-    dataset: isDev.value ? dataJson : httpData.value || []
+    dataset: httpData.value
   }
   hideTooTipHand(myChart)
-  myChart.setOption(option)
+  myChart.setOption(option,true)
 }
 let requestParams = computed(() => {
   return {
@@ -58,7 +58,7 @@ let requestParams = computed(() => {
   }
 })
 // 接口数据
-let httpData: Ref = useHttpHand(requestParams, init)
+let httpData: Ref = props.dev? ref(dataJson): useHttpHand(requestParams, init)
 
 watch(
   () => [props.config.x, props.config.y],

@@ -1,7 +1,7 @@
 <template>
   <formLayout title="基础">
     <sFormLayout :rate="50" title="类型">
-      <el-select size="small" v-model="optionCom.type" placeholder="请选择">
+      <el-select size="small" v-model="optionCom.type" placeholder="请选择" @change="changeTypeHand">
         <el-option v-for="item in datePickerTypeList" v-bind="item"></el-option>
       </el-select>
     </sFormLayout>
@@ -25,8 +25,10 @@
       <el-date-picker
         v-bind="optionCom"
         v-model="optionCom.modelValue"
+        :readonly="false"
         size="small"
         @change="changeDefaultValue"
+        :key="initDateKey"
       ></el-date-picker>
     </sFormLayout>
 
@@ -34,14 +36,14 @@
       <el-input
         size="small"
         v-model="optionCom.format"
-        placeholder="显示格式化:YY-MM-DD"
+        placeholder="显示式化:YYYY-MM-DD HH:mm:ss"
       ></el-input>
     </sFormLayout>
     <sFormLayout :rate="100" title="值格式化">
       <el-input
         size="small"
         v-model="optionCom.valueFormat"
-        placeholder="值格式化:YY-MM-DD"
+        placeholder="值格式化:YYYY-MM-DD HH:mm:ss"
       ></el-input>
     </sFormLayout>
   </formLayout>
@@ -52,7 +54,7 @@ import formLayout from '@/components/form-layout/index.vue'
 import sFormLayout from '@/components/s-form-layout-small/index.vue'
 import { computed } from 'vue'
 import type { IDatePicker } from '../../types/date-picker'
-import { datePickerTypeList, datePickerDefaultTypes, datePickerFix } from '../../constant'
+import { datePickerTypeList, datePickerDefaultTypes, datePickerFix, datePickermutilList } from '../../constant'
 const props = defineProps<{
   option: IDatePicker
 }>()
@@ -63,10 +65,19 @@ let optionCom = computed<IDatePicker>({
     emit('update:option', val)
   }
 })
-
+let initDateKey = computed(() => {
+  return JSON.stringify({...optionCom.value,modelValue:'',})
+})
 let useFixValue = computed(() => {
   return optionCom.value.defaultType === datePickerFix
 })
+const changeTypeHand = (type:any) => {
+    if(datePickermutilList.includes(type)){
+      optionCom.value.modelValue = []
+    }else{
+      optionCom.value.modelValue = ''
+    }
+}
 const changeDefaultValue = (e: any) => {
   emit('update:option', { ...optionCom.value, modelValue: e })
 }

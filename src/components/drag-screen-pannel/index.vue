@@ -19,7 +19,7 @@
           :style="pannelStyle"
         >
           <VueDragResizeRotate
-            v-for="item in props.pannel.components"
+            v-for="(item,index) in pannel.components"
             @refLineParams="refLineParams"
             :snap="true"
             :snap-distance="10"
@@ -45,7 +45,7 @@
             @rotating="(rotate: any) => onRotating(rotate, item)"
             @rotatestop="(rotate: any) => onRotating(rotate, item)"
           >
-            <component :is="item.baseConfig.component" :config="item" :pannel="pannel"></component>
+            <component :is="item.baseConfig.component" v-model:config="pannel.components[index]" :pannel="pannel"></component>
           </VueDragResizeRotate>
           <subLine ref="subLineRef" />
           <Area

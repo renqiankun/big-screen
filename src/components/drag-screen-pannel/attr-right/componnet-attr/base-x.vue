@@ -175,7 +175,6 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import type { IChartOption, IComponent } from '../../types/type'
 import formLayout from '@/components/form-layout/index.vue'
 import sFormLayout from '@/components/s-form-layout-small/index.vue'
 import { Warning } from '@element-plus/icons-vue'

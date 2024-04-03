@@ -11,21 +11,31 @@ export type IDateType =
   | 'monthrange'
 
 export type IDatePickerEvents = {
-    label: string
-    event: any
+  label: string
+  event: any
+}
+
+export type Ilisteners = {
+  relComponentId: string; 
+  relEvent: string
+  // 组件属性与新属性关联map
+  relMap:Record<any,any>
 }
 export type IDatePicker = {
   type: IDateType
   placeholder?: string
-  format?:string
+  format?: string
   valueFormat?: string
   bgColor: string
   color?: string
-  readonly?:boolean
-
+  readonly?: boolean
   // 当前时间或固定值 或无
   defaultType?: 'now' | 'fix' | ''
-  modelValue?: '' | Date | [any ,any ],
+  // 绑定的数据
+  modelValue?: any
+  propDesc?: Array<{ label: any; value: any }>
   // 事件
-  events?:Array<IDatePickerEvents>
+  events?: Array<IDatePickerEvents>
+  // 监听事件如组件绑定关系
+  listeners?: Array<Ilisteners>
 }

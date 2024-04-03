@@ -27,7 +27,7 @@ import { computed, ref } from 'vue'
 import request from '@/components/drag-screen-pannel/request/request.vue'
 import datePickerNormal from '@/components/drag-screen-pannel/attr-right/componnet-attr/date-picker-normal.vue'
 import type { IDatePicker } from '../../types/date-picker'
-import baseEvents from '@/components/drag-screen-pannel/attr-right/componnet-attr/base-events.vue'
+import baseEvents from '@/components/drag-screen-pannel/attr-right/componnet-attr/base-events/base-events.vue'
 const props = defineProps<{
   pannel: IPannel
   current: IComponent

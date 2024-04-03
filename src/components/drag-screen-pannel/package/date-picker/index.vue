@@ -1,6 +1,14 @@
 <template>
   <div class="reset-date-picker">
-    <el-date-picker :style="dateStyle" v-bind="attrOption" />
+    <el-date-picker
+      :key="JSON.stringify({ ...attrOption, modelValue: '' })"
+      :style="dateStyle"
+      v-bind="{
+        ...attrOption,
+        ...bindListener
+      }"
+      v-model="attrOption.modelValue"
+    />
   </div>
 </template>
 
@@ -11,6 +19,8 @@ import type { IDatePicker } from '../../types/date-picker'
 import type { IGlobalRequest } from '../../types/request'
 import { useHttpHand } from '../http/http'
 import { datePickerNow, datePickermutilList } from '../../constant'
+import { dayjs } from 'element-plus'
+import { useListenerHand } from '../utils'
 const props = withDefaults(
   defineProps<{
     dev?: boolean // 开发模式  静态数据或 http请求数据
@@ -49,31 +59,34 @@ let dateStyle = computed(() => {
 onBeforeUnmount(() => {})
 
 const initDate = () => {
-  let nowValue = useNowValue.value ? new Date() : undefined
+  let valueFormat = attrOption.value.valueFormat || 'YYYY-MM-DD'
+  let nowValue = useNowValue.value ? dayjs(new Date()).format(valueFormat) : ''
   if (isMutil.value) {
     attrOption.value.modelValue = [nowValue, nowValue]
   } else {
     attrOption.value.modelValue = nowValue
   }
 }
+// 绑定关联组件事件
+let bindListener: Ref = useListenerHand({
+  option: props.config.option as IDatePicker,
+  components: props.pannel.components
+})
 const init = async () => {
-  await nextTick()
   initDate()
 }
-
 // 接口数据
-let httpData: Ref = useHttpHand(
-  toRef(() => {
-    return {
-      globalRequest: props.pannel.globalRequest ?? ({} as IGlobalRequest),
-      request: props.config.request ?? {},
-      globalVariable: {
-        ...props.pannel.globalVariable,
-        ...props.globalVariable
-      }
+let requestParams = computed(() => {
+  return {
+    globalRequest: props.pannel.globalRequest ?? ({} as IGlobalRequest),
+    request: props.config.request ?? {},
+    globalVariable: {
+      ...props.pannel.globalVariable,
+      ...props.globalVariable
     }
-  })
-)
+  }
+})
+let httpData: Ref = useHttpHand(requestParams)
 watch(
   () => [attrOption.value.type, attrOption.value.defaultType],
   (newVal) => {

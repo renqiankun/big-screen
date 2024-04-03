@@ -13,6 +13,7 @@
       type="border-card"
       class="series-tab"
       closable
+      @tabRemove="removeHand"
     >
       <el-tab-pane v-for="(item, index) in series" :label="item.type" :name="index">
         <baseSeriesBarLine :seriesItem="item" :option="current.option" />
@@ -23,16 +24,21 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import type { IComponent,IChartOption } from '../../../types/type'
+import type { IComponent, IChartOption } from '../../../types/type'
 import baseSeriesBarLine from './base-series-bar-line.vue'
 import { Plus } from '@element-plus/icons-vue'
-import type { IbarLineSeries } from '@/components/drag-screen-pannel/types/base';
+import type { IbarLineSeries } from '@/components/drag-screen-pannel/types/base'
 const props = defineProps<{
   current: IComponent
 }>()
 
-let series = computed(() => {
-  return (props.current.option as IChartOption).series
+let series = computed({
+  get: () => {
+    return (props.current.option as IChartOption).series
+  },
+  set: (val) => {
+    ;(props.current.option as IChartOption).series = val
+  }
 })
 
 const editableTabsValue = ref(0)
@@ -47,6 +53,13 @@ const addType = () => {
   }
   ;(props.current.option as IChartOption).series.push(item)
 }
+
+const removeHand = (index:any) => {
+  let newSeries = series.value.filter((item, i) => i !== index)
+  series.value = newSeries
+}
+
+const emits = defineEmits(['update:current'])
 </script>
 
 <style lang="scss" scoped>

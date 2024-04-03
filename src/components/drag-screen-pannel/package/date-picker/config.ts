@@ -1,21 +1,31 @@
+import type { IDatePicker } from "../../types/date-picker"
 
 
 export const datePicker= {
-    label: '日期',
-    img: 'bar_x',
-    component: 'date-picker',
-    configComponent: 'date-picker-config',
-    w:220,
-    h:32,
-    option: {
-      type:'date',
-      bgColor:'#fff',
-      defaultType:'now',
-      events:[
-        {label:'改变',event:'onChange'}
-      ]
-    }
-  }
+  label: '日期',
+  img: 'bar_x',
+  component: 'date-picker',
+  configComponent: 'date-picker-config',
+  w: 220,
+  h: 32,
+  option:<IDatePicker> {
+    type: 'date',
+    valueFormat:'YYYY-MM-DD',
+    format:'YYYY-MM-DD',
+    bgColor: '#fff',
+    defaultType: 'now',
+    modelValue: '',
+    // 此字段为prop的描述
+    propDesc:[
+      { label: '日期', value: 'modelValue' },
+    ],
+    events: [
+      { label: '修改时触发', event: 'onChange' }
+    ],
+    // 事件和组件绑定关系
+    listeners:[]
+  },
+}
   
 
   export const daterangePicker= {
@@ -23,7 +33,7 @@ export const datePicker= {
     img: 'bar_x',
     component: 'date-picker',
     configComponent: 'date-picker-config',
-    w:20,
+    w:220,
     h:32,
     option: {
       type:'daterange',

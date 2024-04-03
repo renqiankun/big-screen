@@ -45,7 +45,7 @@ const init = async () => {
     dataset: isDev.value ? dataJson : httpData.value || []
   }
   hideTooTipHand(myChart)
-  myChart.setOption(option)
+  myChart.setOption(option,true)
 }
 // 接口数据
 let requestParams = computed(() => {

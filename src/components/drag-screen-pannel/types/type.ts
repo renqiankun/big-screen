@@ -1,4 +1,5 @@
 import type { ITooltip, IbarLineSeries, IbarxAxis, IbaryAxis, Igrid, Ilegend, IpieSeries } from "./base"
+import type { IDatePicker } from "./date-picker"
 import type { IRquest,IGlobalRequest } from "./request"
 
 export type IPannel = {
@@ -31,7 +32,7 @@ export type IComponent = {
   // 基本信息
   baseConfig: IBaseConfig
   // 各种组件的配置信息
-  option: IChartOption | TextOption | Object
+  option: IChartOption | TextOption | Object |IDatePicker
 
   // 请求信息
   request: IRquest

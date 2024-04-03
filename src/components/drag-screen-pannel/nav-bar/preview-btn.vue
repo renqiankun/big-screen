@@ -37,6 +37,7 @@ let dialogVisible = ref(false)
 const previewHand = (type: boolean) => {
   dev.value = type
   dialogVisible.value = true
+  console.log(props.pannel)
 }
 </script>
 

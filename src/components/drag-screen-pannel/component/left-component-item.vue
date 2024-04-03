@@ -42,7 +42,10 @@ const handleDragStart = (e: any) => {
       component: props.component as string,
       configComponent:props.configComponent as string
     },
-    option: props.option,
+    option: {
+      listeners:[],
+      ...props.option,
+    },
 
     request: { dataType: 'form-data' } as IRquest
   }
